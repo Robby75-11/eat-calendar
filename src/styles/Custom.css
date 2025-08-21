@@ -1,0 +1,85 @@
+/* 🎨 Palette personalizzata */
+:root {
+  --primary-color: #6c63ff; /* viola moderno */
+  --secondary-color: #ff6584; /* rosa acceso */
+  --accent-color: #3ac47d; /* verde pastello */
+  --bg-light: #f8f9fa;
+  --text-dark: #333;
+}
+
+/* Body */
+body {
+  background-color: var(--bg-light);
+  font-family: "Poppins", sans-serif;
+  color: var(--text-dark);
+}
+
+/* Card */
+.card {
+  border-radius: 12px;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Titoli */
+h2, h3 {
+  font-weight: 600;
+}
+
+/* Bottoni */
+.btn-success {
+  background-color: var(--accent-color);
+  border: none;
+  font-weight: 500;
+}
+
+.btn-success:hover {
+  background-color: #2e9f63;
+}
+
+.btn-outline-danger {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: #fff;
+}
+
+/* Lista ricette */
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #eee;
+  padding: 12px 16px;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+/* Input */
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  transition: border-color 0.2s;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.15rem rgba(108, 99, 255, 0.25);
+}
+
+/* Label */
+.form-label {
+  font-weight: 500;
+  color: var(--primary-color);
+}
