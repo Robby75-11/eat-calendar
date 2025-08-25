@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { createRecipe } from "../api";
+import { createRecipe, uploadRecipeImages } from "../api"; // 🔹 aggiungi upload API
 
 const RecipeForm = ({ onRecipeAdded }) => {
   const [titolo, setTitolo] = useState("");
   const [descrizione, setDescrizione] = useState("");
   const [ingredienti, setIngredienti] = useState("");
+  const [files, setFiles] = useState([]); // 🔹 immagini selezionate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,20 +13,29 @@ const RecipeForm = ({ onRecipeAdded }) => {
     const nuovaRicetta = {
       titolo,
       descrizione,
-      ingredienti: ingredienti.split(",").map((i) => i.trim()), // trasformo stringa in array
+      ingredienti: ingredienti.split(",").map((i) => i.trim()),
     };
 
     try {
+      // 1️⃣ creo ricetta senza immagini
       const response = await createRecipe(nuovaRicetta);
-      console.log("Ricetta creata:", response.data);
+      const createdRecipe = response.data;
 
-      // notifico al parent che c’è una nuova ricetta
-      if (onRecipeAdded) onRecipeAdded(response.data);
+      // 2️⃣ se ho immagini le carico con PATCH
+      if (files.length > 0) {
+        const formData = new FormData();
+        files.forEach((file) => formData.append("files", file));
 
-      // reset campi
+        await uploadRecipeImages(createdRecipe.id, formData);
+      }
+
+      if (onRecipeAdded) onRecipeAdded(createdRecipe);
+
+      // reset form
       setTitolo("");
       setDescrizione("");
       setIngredienti("");
+      setFiles([]);
     } catch (error) {
       console.error("Errore nella creazione ricetta:", error);
     }
@@ -71,6 +81,16 @@ const RecipeForm = ({ onRecipeAdded }) => {
           />
         </div>
 
+        <div>
+          <label className="form-label">Immagini</label>
+          <input
+            type="file"
+            className="form-control"
+            multiple
+            onChange={(e) => setFiles(Array.from(e.target.files))}
+          />
+        </div>
+
         <button type="submit" className="btn btn-success w-100">
           💾 Salva Ricetta
         </button>
@@ -78,4 +98,5 @@ const RecipeForm = ({ onRecipeAdded }) => {
     </div>
   );
 };
+
 export default RecipeForm;

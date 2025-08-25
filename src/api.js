@@ -25,6 +25,12 @@ export const fetchRecipeById = (id) => api.get(`/recipes/${id}`);
 export const createRecipe = (recipe) => api.post("/recipes", recipe);
 export const deleteRecipe = (id) => api.delete(`/recipes/${id}`);
 
+// 🔹 nuovo: upload immagini ricetta
+export const uploadRecipeImages = (id, formData) =>
+  api.patch(`/recipes/${id}/images`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
 // 📅 MEAL PLANS
 export const fetchMealPlans = () => {
   const userId = localStorage.getItem("userId");

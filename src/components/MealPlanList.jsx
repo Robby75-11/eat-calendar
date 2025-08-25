@@ -27,6 +27,9 @@ function MealPlansList() {
       {status === "failed" && (
         <p className="text-danger">Errore durante il caricamento.</p>
       )}
+      {status === "succeeded" && mealPlans.length === 0 && (
+        <p className="text-muted">Nessun piano pasto ancora aggiunto.</p>
+      )}
 
       <ul className="list-group">
         {mealPlans.map((plan) => (
@@ -35,8 +38,14 @@ function MealPlansList() {
             className="list-group-item d-flex justify-content-between align-items-center"
           >
             <div>
-              <strong>{plan.nome}</strong> <br />
-              {plan.descrizione}
+              <strong>
+                {plan.giorno} – {plan.pasto}
+              </strong>
+              <br />
+              Ricetta:{" "}
+              {plan.recipe?.titolo
+                ? plan.recipe.titolo
+                : `ID ${plan.recipe?.id || "?"}`}
             </div>
             <button
               className="btn btn-sm btn-danger"

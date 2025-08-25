@@ -30,57 +30,6 @@ const RecipeList = () => {
     }
   };
 
-  // 🔹 Funzione per determinare immagine in base al titolo
-  const getImageUrl = (titolo, id) => {
-    const lower = titolo.toLowerCase();
-
-    // Ricette specifiche
-    if (lower.includes("panzerotto"))
-      return `https://source.unsplash.com/400x250/?panzerotto,forno,italian&sig=${id}`;
-    if (lower.includes("pizza") && lower.includes("viennese"))
-      return `https://source.unsplash.com/400x250/?pizza,sausage,italian&sig=${id}`;
-    if (lower.includes("pizza") && lower.includes("margherita"))
-      return `https://source.unsplash.com/400x250/?pizza,margherita,italian&sig=${id}`;
-    if (lower.includes("pasta e lenticchie"))
-      return `https://source.unsplash.com/400x250/?pasta,lentils,italian&sig=${id}`;
-    if (lower.includes("piadina"))
-      return `https://source.unsplash.com/400x250/?piadina,flatbread,italian&sig=${id}`;
-    if (lower.includes("fritta"))
-      return `https://source.unsplash.com/400x250/?fried,italian,streetfood&sig=${id}`;
-    if (lower.includes("pasta crudaiola"))
-      return `https://source.unsplash.com/400x250/?pasta,tomato,basil,italian&sig=${id}`;
-    if (lower.includes("pasta alla ricotta"))
-      return `https://source.unsplash.com/400x250/?pasta,ricotta,italian&sig=${id}`;
-    if (lower.includes("polpo alla griglia"))
-      return `https://source.unsplash.com/400x250/?grilled,octopus,seafood,italian&sig=${id}`;
-    if (lower.includes("mozzarella") && lower.includes("pomodori"))
-      return `https://source.unsplash.com/400x250/?caprese,mozzarella,tomato,italian&sig=${id}`;
-    if (lower.includes("pasta al sugo"))
-      return `https://source.unsplash.com/400x250/?pasta,tomato sauce,italian&sig=${id}`;
-
-    // Categorie generiche
-    if (
-      lower.includes("pasta") ||
-      lower.includes("spaghetti") ||
-      lower.includes("lasagna") ||
-      lower.includes("gnocchi") ||
-      lower.includes("risotto")
-    ) {
-      return `https://source.unsplash.com/400x250/?pasta,italian,food&sig=${id}`;
-    } else if (
-      lower.includes("pollo") ||
-      lower.includes("carne") ||
-      lower.includes("bistecca") ||
-      lower.includes("manzo") ||
-      lower.includes("pesce")
-    ) {
-      return `https://source.unsplash.com/400x250/?meat,dish,italian food&sig=${id}`;
-    }
-
-    // Default
-    return `https://source.unsplash.com/400x250/?italian,food&sig=${id}`;
-  };
-
   if (loading) return <Spinner animation="border" className="mt-3" />;
 
   return (
@@ -95,7 +44,11 @@ const RecipeList = () => {
               <Card className="shadow-sm h-100 border-0 rounded-3">
                 <Card.Img
                   variant="top"
-                  src={getImageUrl(recipe.titolo, recipe.id)}
+                  src={
+                    recipe.immagineUrl
+                      ? recipe.immagineUrl
+                      : "https://via.placeholder.com/400x250.png?text=Nessuna+Immagine"
+                  }
                   alt={recipe.titolo}
                   style={{ objectFit: "cover", height: "200px" }}
                 />
