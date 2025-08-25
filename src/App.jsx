@@ -8,6 +8,7 @@ import LoginForm from "./components/LoginForm";
 import CalendarPage from "./components/CalendarPAge";
 import RegisterForm from "./components/RegisterForm";
 import "./styles/Custom.css";
+
 function App() {
   return (
     <Router>
