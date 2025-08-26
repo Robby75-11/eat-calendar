@@ -25,6 +25,9 @@ export const fetchRecipeById = (id) => api.get(`/recipes/${id}`);
 export const createRecipe = (recipe) => api.post("/recipes", recipe);
 export const deleteRecipe = (id) => api.delete(`/recipes/${id}`);
 
+// ✏️ update ricetta (titolo, descrizione, ingredienti)
+export const updateRecipe = (id, recipe) => api.put(`/recipes/${id}`, recipe);
+
 // 🔹 nuovo: upload immagini ricetta
 export const uploadRecipeImages = (id, formData) =>
   api.patch(`/recipes/${id}/images`, formData, {
