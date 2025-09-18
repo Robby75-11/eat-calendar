@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchRecipes, updateRecipe, deleteRecipe } from "../api";
 import { Card, Button, Spinner } from "react-bootstrap";
 
@@ -33,6 +33,7 @@ const RecipeList = () => {
       setRecipes((prev) => prev.filter((r) => r.id !== id));
     } catch (error) {
       console.error("Errore nell'eliminazione ricetta:", error);
+      alert("Impossibile eliminare la ricetta. Si prega di riprovare.");
     }
   };
 
